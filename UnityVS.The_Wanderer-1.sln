@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.The_Wanderer-1.CSharp", "UnityVS.The_Wanderer-1.CSharp.csproj", "{280C54D4-ED53-AFBA-D0D3-FE7EC6B1D5B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityVS.The_Wanderer-1.CSharp.Editor", "UnityVS.The_Wanderer-1.CSharp.Editor.csproj", "{EAD45616-E7A6-12EA-C67C-C354482F3852}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{280C54D4-ED53-AFBA-D0D3-FE7EC6B1D5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{280C54D4-ED53-AFBA-D0D3-FE7EC6B1D5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{280C54D4-ED53-AFBA-D0D3-FE7EC6B1D5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{280C54D4-ED53-AFBA-D0D3-FE7EC6B1D5B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD45616-E7A6-12EA-C67C-C354482F3852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD45616-E7A6-12EA-C67C-C354482F3852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD45616-E7A6-12EA-C67C-C354482F3852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD45616-E7A6-12EA-C67C-C354482F3852}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

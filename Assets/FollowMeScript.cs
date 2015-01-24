@@ -23,7 +23,7 @@ public class FollowMeScript : MonoBehaviour {
 		Vector3 moveToward = GameObject.Find("wanderer").transform.position;
 		moveDirection = moveToward - currentPosition;
 		moveDirection.z = 0;
-		moveDirection.y+=2;
+		moveDirection.y+=1;
 
 	
 		Vector3 target = moveDirection * moveSpeed + currentPosition;
