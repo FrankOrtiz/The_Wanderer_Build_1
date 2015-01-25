@@ -2,6 +2,12 @@
 using System.Collections;
 
 public class MovingScript : MonoBehaviour {
+	public static int health;
+	public static bool canMoonWalk;
+	public static bool hasSpear;
+	public static bool hasHelmet;
+	public int current;
+	public float timer;
 	public float moveSpeed;
 	public float upSpeed;
 	public float leftSpeed;
@@ -13,6 +19,7 @@ public class MovingScript : MonoBehaviour {
 	private Vector3 moveDirection;
 	// Use this for initialization
 	void Start () {
+		canMoonWalk = true;
 		topSpeed = 0.09f;
 		midSpeed = 0.035f;
 		moveSpeed = 0.02f;
@@ -20,66 +27,89 @@ public class MovingScript : MonoBehaviour {
 		downSpeed = moveSpeed;
 		leftSpeed = moveSpeed;
 		rightSpeed = moveSpeed;
+		health = 308;
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		Vector3 currentPosition = this.transform.position;
+		if (Time.timeSinceLevelLoad > 8) {
+			Vector3 currentPosition = this.transform.position;
+			if (health>100){
+				Debug.Log("The Wanderer has found a light.");
+			}
+			if (health > 0) {
 
-		//Up input logic
-		if ((Input.GetKey(KeyCode.UpArrow))||(Input.GetKey(KeyCode.W))){
-			SmoothMoves();
-			currentPosition.y+=upSpeed;
-			downSpeed = midSpeed;
-			leftSpeed = midSpeed;
-			rightSpeed = midSpeed;
-		}
-		//Down input logic
-		else if ((Input.GetKey(KeyCode.DownArrow))||(Input.GetKey(KeyCode.S))){
-			SmoothMoves();
-			currentPosition.y-=downSpeed;
-			upSpeed = midSpeed;
-			leftSpeed = midSpeed;
-			rightSpeed = midSpeed;
-		}
-		//Left input logic
-		else if ((Input.GetKey(KeyCode.LeftArrow))||(Input.GetKey(KeyCode.A))){
-			SmoothMoves();
-			currentPosition.x-=leftSpeed;
-			upSpeed = midSpeed;
-			downSpeed = midSpeed;
-			rightSpeed = midSpeed;
-		}
-		//Right input logic
-		else if ((Input.GetKey(KeyCode.RightArrow))||(Input.GetKey(KeyCode.D))){
-			SmoothMoves();
-			currentPosition.x+=rightSpeed;
-			upSpeed = midSpeed;
-			downSpeed = midSpeed;
-			leftSpeed = midSpeed;
-		}
-		else{
-			//moveSpeed=0;
-			//turnSpeed=0;
-		}
+				timer += Time.deltaTime;
+				if(timer > 1.0f)
+				{
+					timer -= 1.0f;
+					health -=1;
+				}
 
-		//Resets/reduces the speed once a key is no longer being pressed.
-		if ((Input.GetKeyUp(KeyCode.UpArrow))||(Input.GetKeyUp(KeyCode.W))){
-			upSpeed=midSpeed;
-		}
-		else if((Input.GetKeyUp(KeyCode.DownArrow))||(Input.GetKeyUp(KeyCode.S))){
-			downSpeed=midSpeed;
-		}
-		else if((Input.GetKeyUp(KeyCode.LeftArrow))||(Input.GetKeyUp(KeyCode.A))){
-			leftSpeed=midSpeed;
-		}
-		else if((Input.GetKeyUp(KeyCode.RightArrow))||(Input.GetKeyUp(KeyCode.D))){
-			rightSpeed=midSpeed;
-		}
+			}
+			else {
+				Debug.Log("Wanderer's light has faded...");
+			}
+			//Up input logic
+			if ((Input.GetKey(KeyCode.UpArrow))||(Input.GetKey(KeyCode.W))){
+				SmoothMoves();
+				currentPosition.y+=upSpeed;
+				downSpeed = midSpeed;
+				leftSpeed = midSpeed;
+				rightSpeed = midSpeed;
+				canMoonWalk=false;
+			}
+			//Down input logic
+			else if ((Input.GetKey(KeyCode.DownArrow))||(Input.GetKey(KeyCode.S))){
+				SmoothMoves();
+				currentPosition.y-=downSpeed;
+				upSpeed = midSpeed;
+				leftSpeed = midSpeed;
+				rightSpeed = midSpeed;
+				canMoonWalk=false;
+			}
+			//Left input logic
+			else if ((Input.GetKey(KeyCode.LeftArrow))||(Input.GetKey(KeyCode.A))){
+				SmoothMoves();
+				currentPosition.x-=leftSpeed;
+				upSpeed = midSpeed;
+				downSpeed = midSpeed;
+				rightSpeed = midSpeed;
+			}
+			//Right input logic
+			else if ((Input.GetKey(KeyCode.RightArrow))||(Input.GetKey(KeyCode.D))){
+				SmoothMoves();
+				currentPosition.x+=rightSpeed;
+				upSpeed = midSpeed;
+				downSpeed = midSpeed;
+				leftSpeed = midSpeed;
+			}
+			else{
+				//moveSpeed=0;
+				//turnSpeed=0;
+			}
 
-		//Responsible for moving the character
-		Vector3 target = moveDirection * moveSpeed + currentPosition;
-		transform.position = Vector3.Lerp (currentPosition, target, Time.deltaTime);
+			//Resets/reduces the speed once a key is no longer being pressed.
+			if ((Input.GetKeyUp(KeyCode.UpArrow))||(Input.GetKeyUp(KeyCode.W))){
+				upSpeed=midSpeed;
+				canMoonWalk=true;
+			}
+			else if((Input.GetKeyUp(KeyCode.DownArrow))||(Input.GetKeyUp(KeyCode.S))){
+				downSpeed=midSpeed;
+				canMoonWalk=true;
+			}
+			else if((Input.GetKeyUp(KeyCode.LeftArrow))||(Input.GetKeyUp(KeyCode.A))){
+				leftSpeed=midSpeed;
+			}
+			else if((Input.GetKeyUp(KeyCode.RightArrow))||(Input.GetKeyUp(KeyCode.D))){
+				rightSpeed=midSpeed;
+			}
+
+			//Responsible for moving the character
+			Vector3 target = moveDirection * moveSpeed + currentPosition;
+			transform.position = Vector3.Lerp (currentPosition, target, Time.deltaTime);
+		}
 		
 		//float targetAngle = Mathf.Atan2 (moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
 		//transform.rotation =
